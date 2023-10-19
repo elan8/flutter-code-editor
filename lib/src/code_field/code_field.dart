@@ -247,8 +247,15 @@ class _CodeFieldState extends State<CodeField> {
     disableSpellCheckIfWeb();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final double width = _codeFieldKey.currentContext!.size!.width;
-      final double height = _codeFieldKey.currentContext!.size!.height;
+      double width = 0;
+      double height = 0;
+      if (_codeFieldKey.currentContext != null && _codeFieldKey.currentContext!.size != null) {
+      if (_codeFieldKey.currentContext!.size!.width !=null && _codeFieldKey!.currentContext!.size!.height != null) {
+      final double width = _codeFieldKey.currentContext!.size!.width ;
+      final double height = _codeFieldKey.currentContext!.size!.height ;
+      }
+      }
+
       windowSize = Size(width, height);
     });
     _onTextChanged();
@@ -514,7 +521,7 @@ class _CodeFieldState extends State<CodeField> {
       widget.controller.selection.base,
       Rect.zero,
     );
-    return (widget.controller.selection.base.offset > 0) ? caretFullHeight! : 0;
+    return (widget.controller.selection.base.offset > 0) ? (caretFullHeight ?? 0) : 0;
   }
 
   double _getPopupLeftOffset(TextPainter textPainter) {
